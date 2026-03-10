@@ -1,12 +1,13 @@
 
-bin/student: obj/student.o obj/main.o
-	gcc obj/student.o obj/main.o -o bin/student
+main.o: main.c student.h structure.h
+	gcc -c main.c
 
-obj/main.o: src/main.c include/student.h include/structure.h
-	gcc -c src/main.c -o obj/main.o
-obj/student.o: src/student.c include/student.h include/structure.h
-	gcc -c src/student.c -o obj/student.o
+student.o: student.c student.h structure.h
+	gcc -c student.c
+
+student: student.o main.o
+	gcc student.o main.o -o student
 
 clean:
-	rm obj/* bin/*
+	rm student.o main.o student
 	
